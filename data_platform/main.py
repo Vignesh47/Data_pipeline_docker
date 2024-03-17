@@ -20,7 +20,7 @@ class data_pipeline:
             logging.info("Pipeline has been Initiated successfully")
             ingest = ingestion.Ingest(self.spark)
             raw_data = ingest.ingest_data()
-            logging.info("File ingestion has been successfully completed")
+            logging.info("File ingestion has been successfully completed>>>>>>>")
             transform = transformation.Transform(self.spark)
             base_data = transform.transform_data(raw_data)
             logging.info("Base --->>>> Data has been successfully cleaned")

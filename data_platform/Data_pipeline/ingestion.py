@@ -1,6 +1,6 @@
 #importing required Libraries for data ingestion
 
-#import pyspark
+import pyspark
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, udf
 from pyspark.sql.functions import *
