@@ -22,16 +22,16 @@ class Ingest:
         try:
             logger = logging.getLogger("Ingest")
             base_data_path = os.path.join(os.getcwd(),"data_platform", "data", "Base_data.xlsx")
-            vechile_data = os.path.join(os.getcwd(),"data_platform", "data", "vehicle_line_mapping.csv")
-            options_data = os.path.join(os.getcwd(), "data_platform", "data", "options_data.csv")
+            vechile_data_path = os.path.join(os.getcwd(),"data_platform", "data", "vehicle_line_mapping.csv")
+            options_data_path = os.path.join(os.getcwd(), "data_platform", "data", "options_data.csv")
 
             # read the CSV file into a DataFramE
-            B_df = self.spark.read.format("com.crealytics.spark.excel").option("header", "true") \
+            base_data_df= self.spark.read.format("com.crealytics.spark.excel").option("header", "true") \
                         .option("inferSchema", "true").load(base_data_path)
-            vechile_df = self.spark.read.csv(vechile_data,header=True)
-            options_df =self.spark.read.csv(options_data,header=True)
+            vechile_df = self.spark.read.csv(vechile_data_path,header=True)
+            options_df =self.spark.read.csv(options_data_path,header=True)
 
-            print(vechile_df,options_df)
+            print(base_data_df,vechile_df,options_df)
 
             logging.info("File has been Loaded successfully")
         except Exception as exp:
@@ -39,5 +39,5 @@ class Ingest:
             logging.error("Ingestion Process has been failed.>" + str(exp))
             raise Exception(" File is not available in the input path ")
 
-        return B_df,vechile_df,options_df
+        return base_data_df,vechile_df,options_df
 
